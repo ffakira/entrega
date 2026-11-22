@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title><%= @page_title || "AKARI" %></title>
+
+    <meta name="description" content="<%= @page_description %>">
+    <meta name="theme-color" content="#FAF3E6">
+    <meta name="color-scheme" content="light">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="AKARI">
+
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="AKARI">
+    <meta property="og:title" content="<%= @page_title %>">
+    <meta property="og:description" content="<%= @page_description %>">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="<%= @page_title %>">
+    <meta name="twitter:description" content="<%= @page_description %>">
+
+    <link rel="icon" type="image/svg+xml" href="/images/akari-icon.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@300;400;500&family=DM+Sans:wght@400;500&display=swap"
+      rel="stylesheet">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="min-h-screen bg-akari-background text-akari-text">
+    <%= yield %>
+  </body>
+</html>

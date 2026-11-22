@@ -1,0 +1,94 @@
+<header
+  class="sticky top-0 z-50 w-full border-b border-[#29251F]/10 bg-[#FAF3E6]/95 backdrop-blur-md"
+  data-controller="mobile-menu"
+  data-action="keydown@window->mobile-menu#closeOnEscape resize@window->mobile-menu#closeOnResize">
+
+  <div class="mx-auto flex min-h-[76px] w-full max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
+
+    <a href="/" aria-label="AKARI - Página inicial" class="flex shrink-0 items-center gap-3">
+      <img src="/images/akari-icon.svg" alt="" width="40" height="40" class="size-10 object-contain">
+      <img src="/images/akari-wordmark.svg" alt="AKARI" width="120" height="28" class="h-7 w-auto object-contain">
+    </a>
+
+    <nav aria-label="Navegação principal" class="hidden items-center gap-7 min-[901px]:flex">
+      <a href="#cardapio" class="font-navigation text-[13px] tracking-wide transition-colors hover:text-akari-red">Cardápio</a>
+      <a href="#pedido" class="font-navigation text-[13px] tracking-wide transition-colors hover:text-akari-red">Pedir online</a>
+      <a href="#horario" class="font-navigation text-[13px] tracking-wide transition-colors hover:text-akari-red">Horário</a>
+      <a href="#contato" class="font-navigation text-[13px] tracking-wide transition-colors hover:text-akari-red">Contato</a>
+    </nav>
+
+    <div class="hidden items-center gap-5 min-[901px]:flex">
+      <a
+        href="https://www.instagram.com/akari_restaunte/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Instagram da AKARI: @akari_restaurante"
+        class="text-[13px] tracking-wide text-[#29251F]/75 transition-colors hover:text-akari-red">
+        @akari_restaurante
+      </a>
+
+      <span aria-hidden="true" class="h-4 w-px bg-[#29251F]/15"></span>
+
+      <a href="tel:+5548996667779" class="whitespace-nowrap text-[13px] tracking-wide transition-colors hover:text-akari-red">
+        (48) 99666-7779
+      </a>
+
+      <a href="/checkout" class="inline-flex min-h-11 items-center justify-center bg-akari-red px-6 text-[13px] font-medium tracking-wide text-akari-background transition-colors duration-200 hover:bg-akari-red-dark">
+        Fazer pedido
+      </a>
+    </div>
+
+    <button
+      type="button"
+      data-mobile-menu-target="button"
+      data-action="mobile-menu#toggle"
+      class="flex size-11 items-center justify-center text-akari-text transition-colors hover:text-akari-red min-[901px]:hidden"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+      aria-controls="mobile-navigation">
+
+      <span data-mobile-menu-target="openIcon">
+        <%= render "shared/icon", name: :menu, class_name: "size-[21px]" %>
+      </span>
+
+      <span data-mobile-menu-target="closeIcon" hidden>
+        <%= render "shared/icon", name: :close, class_name: "size-[21px]" %>
+      </span>
+    </button>
+  </div>
+
+  <nav
+    id="mobile-navigation"
+    data-mobile-menu-target="menu"
+    aria-label="Navegação mobile"
+    inert
+    class="absolute inset-x-0 top-full z-50 hidden flex-col border-b border-[#29251F]/10 bg-[#FAF3E6] px-6 pb-7 pt-3 shadow-lg [&.is-open]:flex min-[901px]:hidden">
+
+    <div class="flex flex-col">
+      <a data-action="click->mobile-menu#close" href="#cardapio" class="border-b border-[#29251F]/10 py-4 font-navigation text-sm tracking-wide hover:text-akari-red">Cardápio</a>
+      <a data-action="click->mobile-menu#close" href="#pedido" class="border-b border-[#29251F]/10 py-4 font-navigation text-sm tracking-wide hover:text-akari-red">Pedir online</a>
+      <a data-action="click->mobile-menu#close" href="#horario" class="border-b border-[#29251F]/10 py-4 font-navigation text-sm tracking-wide hover:text-akari-red">Horário</a>
+      <a data-action="click->mobile-menu#close" href="#contato" class="border-b border-[#29251F]/10 py-4 font-navigation text-sm tracking-wide hover:text-akari-red">Contato</a>
+    </div>
+
+    <div class="mt-6 flex flex-col gap-5">
+      <a
+        href="https://www.instagram.com/akari_restaunte/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Instagram da AKARI: @akari_restaurante"
+        class="w-fit text-sm tracking-wide text-[#29251F]/75 hover:text-akari-red">
+        @akari_restaurante
+      </a>
+
+      <a href="tel:+5548996667779" class="flex w-fit items-center gap-3 text-sm hover:text-akari-red">
+        <%= render "shared/icon", name: :phone, class_name: "size-4" %>
+        (48) 99666-7779
+      </a>
+
+      <a href="/checkout" class="flex min-h-12 items-center justify-center bg-akari-red px-6 text-sm font-medium tracking-wide text-akari-background hover:bg-akari-red-dark">
+        Fazer pedido
+      </a>
+    </div>
+  </nav>
+</header>

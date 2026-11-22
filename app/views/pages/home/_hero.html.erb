@@ -1,0 +1,50 @@
+<section aria-labelledby="hero-heading" class="relative w-full overflow-hidden bg-akari-background">
+  <div class="mx-auto flex min-h-[650px] w-full max-w-[1440px] flex-col items-center justify-center gap-12 px-8 py-20 lg:min-h-[760px] lg:flex-row lg:gap-16 lg:px-16 lg:py-24">
+
+    <div class="flex w-full flex-col items-center text-center lg:w-1/2">
+      <h1 id="hero-heading" class="w-full">
+        <span class="sr-only">AKARI - Comida japonesa em Tubarão</span>
+        <img src="/images/akari-logo.png" alt="" aria-hidden="true" class="mx-auto w-full max-w-[520px]" fetchpriority="high">
+      </h1>
+
+      <p class="mt-8 max-w-[520px] text-xl leading-relaxed text-[#3a3a3a] max-[900px]:text-base">
+        Gyoza, karaage, donburi e katsu curry feitos na hora, prontos para você levar para casa.
+      </p>
+
+      <div class="mt-10 flex w-full flex-wrap items-center justify-center gap-4 max-[500px]:flex-col">
+        <a href="/checkout" class="flex min-h-[54px] items-center justify-center gap-2.5 bg-akari-red px-9 py-4 font-navigation text-base tracking-wide text-white transition-colors duration-200 hover:bg-akari-red-dark max-[500px]:w-full">
+          <%= render "shared/icon", name: :bag, class_name: "size-5" %>
+          <span>Fazer pedido</span>
+        </a>
+
+        <a href="#horario" class="flex min-h-[54px] items-center justify-center gap-2.5 border border-akari-text bg-transparent px-9 py-4 font-navigation text-base tracking-wide text-akari-text transition-colors duration-200 hover:border-akari-red hover:text-akari-red max-[500px]:w-full">
+          <%= render "shared/icon", name: :clock, class_name: "size-5" %>
+          <span>Ver horário</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="relative mt-8 flex w-full items-center justify-center lg:mt-0 lg:w-1/2">
+      <div class="relative w-full max-w-[680px]">
+        <div aria-hidden="true" class="absolute -right-8 -top-8 aspect-square w-[55%] rounded-full bg-akari-red lg:-right-12 lg:-top-12"></div>
+
+        <img
+          src="/images/hero-takeaway.jpg"
+          alt="Pratos japoneses para levar, incluindo katsu curry, frango grelhado, gyoza e karaage"
+          class="relative z-10 h-auto w-full object-cover shadow-sm"
+          fetchpriority="high">
+
+        <div aria-hidden="true" class="absolute -left-4 top-1/4 z-20 bg-akari-red px-3.5 py-8 shadow-sm lg:-left-6">
+          <span class="font-display text-lg leading-none tracking-[0.2em] text-white [writing-mode:vertical-rl]">持ち帰り</span>
+        </div>
+
+        <img
+          src="/images/sakura-branch.png"
+          alt=""
+          aria-hidden="true"
+          class="absolute -bottom-10 -left-8 z-20 w-[140px] object-contain lg:-bottom-14 lg:-left-12 lg:w-[190px]"
+          loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>

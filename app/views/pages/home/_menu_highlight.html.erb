@@ -1,0 +1,100 @@
+<section
+  id="cardapio"
+  aria-labelledby="menu-highlights-heading"
+  data-controller="menu-slider"
+  class="relative isolate w-full overflow-hidden bg-akari-text py-24 text-akari-background sm:py-32">
+
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 z-0 bg-[url('/images/pattern-background.jpeg')] bg-repeat bg-[length:420px_auto] opacity-[0.07] mix-blend-screen"></div>
+
+  <div class="relative z-10 mx-auto w-full max-w-[1440px] px-[5%]">
+
+    <div class="mb-12 flex flex-col justify-between gap-8 lg:mb-16 lg:flex-row lg:items-end">
+      <div class="max-w-2xl">
+        <p class="mb-5 flex items-center gap-3 font-jost text-xs uppercase tracking-[0.3em] text-[#DDA9B6]">
+          <span class="h-px w-8 bg-[#DDA9B6]"></span>
+          Nossa cozinha
+        </p>
+
+        <h2 id="menu-highlights-heading" class="font-cormorant text-5xl leading-[1.05] text-akari-background sm:text-6xl lg:text-7xl">
+          Feito na hora.<br>
+          <span class="italic text-[#DDA9B6]">Feito com cuidado.</span>
+        </h2>
+
+        <p class="mt-6 max-w-lg font-dm-sans text-base leading-relaxed text-akari-background/65 sm:text-lg">
+          Cada prato é preparado no momento do pedido, com ingredientes selecionados e atenção a cada detalhe.
+        </p>
+      </div>
+
+      <div class="flex items-center justify-between gap-6 lg:justify-end">
+        <div class="hidden text-right sm:block">
+          <p lang="ja" class="font-cormorant text-2xl text-[#DDA9B6]">心を込めて</p>
+          <p class="mt-1 font-jost text-[10px] uppercase tracking-[0.2em] text-akari-background/45">Preparado com carinho</p>
+        </div>
+
+        <div class="flex shrink-0 items-center gap-3">
+          <button
+            type="button"
+            data-action="menu-slider#previous"
+            aria-label="Pratos anteriores"
+            aria-controls="menu-highlights-slider"
+            class="flex size-12 items-center justify-center border border-white/20 text-akari-background transition-all duration-300 hover:border-akari-red hover:bg-akari-red hover:text-white">
+            <span aria-hidden="true" class="text-xl">←</span>
+          </button>
+
+          <button
+            type="button"
+            data-action="menu-slider#next"
+            aria-label="Próximos pratos"
+            aria-controls="menu-highlights-slider"
+            class="flex size-12 items-center justify-center border border-white/20 text-akari-background transition-all duration-300 hover:border-akari-red hover:bg-akari-red hover:text-white">
+            <span aria-hidden="true" class="text-xl">→</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <% dishes = [
+      { name: "Gyoza", japanese: "餃子", image: "dish-gyoza-CNkFMXbt", alt: "Gyoza japonês" },
+      { name: "Katsu Kare", japanese: "カツカレー", image: "dish-katsu-curry-DCJWedwK", alt: "Katsu curry japonês" },
+      { name: "Karaage Frango", japanese: "唐揚げ", image: "dish-karaage-Hpih_kLt", alt: "Frango karaage japonês" },
+      { name: "Carne Yakiniku Donburi", japanese: "焼肉丼", image: "dish-beef-yakiniku-CCEf6jNH", alt: "Carne yakiniku servida com arroz" },
+      { name: "Frango Teriyaki Donburi", japanese: "照り焼き丼", image: "dish-teriyaki-donburi-BD1_Jg26", alt: "Donburi de frango teriyaki" },
+      { name: "Pork Katsu", japanese: "豚カツ", image: "dish-pork-katsu-BX_8WYAW", alt: "Pork katsu japonês" }
+    ] %>
+
+    <ul
+      id="menu-highlights-slider"
+      data-menu-slider-target="slider"
+      aria-label="Pratos preparados na hora"
+      class="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+
+      <% dishes.each do |dish| %>
+        <li class="w-[82%] shrink-0 snap-start sm:w-[48%] lg:w-[32%]">
+          <article class="group relative aspect-square overflow-hidden bg-akari-text">
+            <picture>
+              <source srcset="/images/dishes/<%= dish[:image] %>.webp" type="image/webp">
+              <img
+                src="/images/dishes/<%= dish[:image] %>.jpg"
+                alt="<%= dish[:alt] %>"
+                loading="lazy"
+                decoding="async"
+                class="size-full object-cover transition-transform duration-700 group-hover:scale-105">
+            </picture>
+
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent"></div>
+
+            <div class="absolute inset-x-0 bottom-0 p-7 sm:p-9">
+              <p lang="ja" class="mb-2 font-cormorant text-3xl text-[#F0BFCB]"><%= dish[:japanese] %></p>
+              <h3 class="font-jost text-2xl font-medium text-white"><%= dish[:name] %></h3>
+            </div>
+          </article>
+        </li>
+      <% end %>
+    </ul>
+
+    <div class="mt-5 flex items-center justify-between border-t border-white/15 pt-5">
+      <p class="font-jost text-[10px] uppercase tracking-[0.25em] text-akari-background/45">AKARI · Feito na hora</p>
+      <p class="font-jost text-xs tracking-wide text-akari-background/50">DESLIZE PARA EXPLORAR</p>
+    </div>
+  </div>
+</section>

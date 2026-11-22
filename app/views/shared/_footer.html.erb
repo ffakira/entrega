@@ -1,0 +1,93 @@
+<footer id="contato" class="relative overflow-hidden bg-akari-text text-akari-background">
+
+  <div class="h-1 w-full bg-akari-red"></div>
+
+  <div class="mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12">
+
+    <div class="grid grid-cols-1 gap-12 py-16 sm:py-20 lg:grid-cols-12 lg:gap-12">
+
+      <div class="lg:col-span-5">
+        <a href="/" aria-label="AKARI - Página inicial" class="inline-flex items-center gap-3">
+          <img src="/images/akari-icon-light.svg" alt="" aria-hidden="true" width="44" height="44" class="size-11 object-contain">
+          <img src="/images/akari-wordmark-light.svg" alt="AKARI" width="128" class="h-auto w-32 object-contain">
+        </a>
+
+        <p class="mt-8 font-jost text-[11px] font-medium uppercase tracking-[0.28em] text-[#DDA9B6]">
+          Comida japonesa
+        </p>
+
+        <p class="mt-4 max-w-sm font-cormorant text-3xl font-light leading-snug text-akari-background sm:text-4xl">
+          Um pouco do Japão,<br>preparado para você.
+        </p>
+
+        <p class="mt-6 font-dm-sans text-sm text-akari-background/50">
+          Tubarão · Santa Catarina
+        </p>
+      </div>
+
+      <div class="lg:col-span-3">
+        <h2 class="mb-7 font-jost text-[11px] font-medium uppercase tracking-[0.25em] text-[#DDA9B6]">
+          Navegação
+        </h2>
+
+        <nav aria-label="Navegação do rodapé" class="flex flex-col items-start gap-4">
+          <a href="#cardapio" class="font-dm-sans text-sm text-akari-background/65 transition-colors duration-200 hover:text-akari-background">Cardápio</a>
+          <a href="/checkout" class="font-dm-sans text-sm text-akari-background/65 transition-colors duration-200 hover:text-akari-background">Pedir online</a>
+          <a href="#horario" class="font-dm-sans text-sm text-akari-background/65 transition-colors duration-200 hover:text-akari-background">Horário de funcionamento</a>
+        </nav>
+      </div>
+
+      <div class="lg:col-span-4">
+        <h2 class="mb-7 font-jost text-[11px] font-medium uppercase tracking-[0.25em] text-[#DDA9B6]">
+          Fale com a gente
+        </h2>
+
+        <div class="flex flex-col items-start gap-5">
+          <a href="tel:+5548996667779" class="group inline-flex items-center gap-3 font-dm-sans text-sm text-akari-background/65 transition-colors duration-200 hover:text-akari-background">
+            <%= render "shared/icon", name: :phone, class_name: "size-4 text-[#DDA9B6]" %>
+            (48) 99666-7779
+          </a>
+
+          <a
+            href="https://www.instagram.com/akari_restaunte/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram da AKARI: @akari_restaurante"
+            class="group inline-flex items-center gap-3 font-dm-sans text-sm text-akari-background/65 transition-colors duration-200 hover:text-akari-background">
+            <span class="text-[#DDA9B6]" aria-hidden="true">@</span>
+            @akari_restaurante
+          </a>
+
+          <a
+            href="https://wa.me/5548996667779?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20um%20pedido."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group inline-flex items-center gap-3 font-dm-sans text-sm text-akari-background/65 transition-colors duration-200 hover:text-akari-background">
+            <%= render "shared/icon", name: :message, class_name: "size-4 text-[#DDA9B6]" %>
+            WhatsApp
+          </a>
+
+          <a href="/checkout" class="mt-2 inline-flex min-h-12 items-center gap-4 bg-akari-red px-6 font-jost text-[13px] font-medium tracking-wide text-akari-background transition-colors duration-200 hover:bg-akari-red-dark">
+            <span>Fazer um pedido</span>
+            <%= render "shared/icon", name: :arrow, class_name: "size-4" %>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-5 border-t border-white/10 py-7 sm:flex-row sm:items-center sm:justify-between">
+      <p class="font-dm-sans text-xs leading-relaxed text-akari-background/40">
+        &copy; <%= Time.current.year %> AKARI Restaurante. Todos os direitos reservados.
+      </p>
+
+      <p lang="ja" class="font-cormorant text-xl tracking-[0.15em] text-akari-background/40">
+        心を込めて
+      </p>
+
+      <p class="font-dm-sans text-xs leading-relaxed text-akari-background/40">
+        Desenvolvido e projetado por
+        <span class="text-akari-background/65">Akira F. Fukushima</span>
+      </p>
+    </div>
+  </div>
+</footer>

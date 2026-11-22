@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme {
+  --color-akari-background: #FAF3E6;
+  --color-akari-text: #29251F;
+  --color-akari-red: #B33A32;
+  --color-akari-red-dark: #922D27;
+  --color-akari-pink: #DDA9B6;
+
+  --font-display: "Cormorant Garamond", serif;
+  --font-cormorant: "Cormorant Garamond", serif;
+  --font-navigation: "Jost", sans-serif;
+  --font-jost: "Jost", sans-serif;
+  --font-dm-sans: "DM Sans", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #B33A32;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

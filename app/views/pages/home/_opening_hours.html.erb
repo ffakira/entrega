@@ -1,0 +1,97 @@
+<section
+  id="horario"
+  aria-labelledby="hours-heading"
+  class="relative isolate overflow-hidden bg-akari-background py-24 text-akari-text sm:py-32">
+
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 z-0 bg-[url('/images/pattern-background.jpeg')] bg-repeat bg-[length:420px_auto] opacity-40 mix-blend-multiply"></div>
+
+  <img
+    src="/images/sakura-branch.png"
+    alt=""
+    aria-hidden="true"
+    class="pointer-events-none absolute -right-16 -top-12 z-0 w-64 rotate-[-12deg] opacity-20 sm:-right-20 sm:-top-20 sm:w-[26rem]">
+
+  <div class="relative z-10 mx-auto w-full max-w-[1440px] px-[5%]">
+
+    <header class="mb-14 border-b border-akari-text/15 pb-6 sm:mb-20">
+      <div class="flex items-center justify-between gap-6">
+        <div class="flex items-center gap-4">
+          <img src="/images/akari-icon.svg" alt="" aria-hidden="true" class="size-10 object-contain sm:size-12">
+
+          <div>
+            <p class="font-jost text-[10px] uppercase tracking-[0.25em] text-akari-red">営業時間 · Horário</p>
+            <h2 id="hours-heading" class="mt-1 font-cormorant text-3xl font-light text-akari-text sm:text-4xl">
+              Horário de funcionamento
+            </h2>
+          </div>
+        </div>
+
+        <span lang="ja" aria-hidden="true" class="hidden font-cormorant text-2xl tracking-[0.2em] text-akari-text/25 sm:block">時間</span>
+      </div>
+    </header>
+
+    <div class="grid grid-cols-1 gap-14 lg:grid-cols-12 lg:gap-20">
+
+      <div class="lg:col-span-5">
+        <p class="font-jost text-[10px] uppercase tracking-[0.25em] text-akari-text/45">
+          Planeje seu pedido
+        </p>
+
+        <p class="mt-6 max-w-lg font-cormorant text-5xl font-light leading-[1.05] text-akari-text sm:text-6xl">
+          Bons momentos <span class="italic text-akari-red">têm seu horário.</span>
+        </p>
+
+        <p class="mt-7 max-w-sm font-dm-sans text-sm leading-7 text-akari-text/65 sm:text-base">
+          Confira nossos horários e programe seu pedido. Será um prazer preparar sua próxima refeição.
+        </p>
+
+        <div class="mt-10 flex items-center gap-3 border-l border-akari-red pl-4">
+          <%= render "shared/icon", name: :info, class_name: "size-4 shrink-0 text-akari-red" %>
+          <p class="font-dm-sans text-xs leading-6 text-akari-text/60">
+            Pedidos para retirada aceitos até 30 minutos antes do fechamento.
+          </p>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7">
+        <ul class="divide-y divide-akari-text/10 border-y border-akari-text/15">
+
+          <li class="flex items-center justify-between gap-6 py-6 sm:py-7">
+            <h3 class="font-jost text-sm uppercase tracking-[0.15em] text-akari-text/65">Segunda-feira</h3>
+            <p class="font-cormorant text-2xl italic text-akari-red">Fechado</p>
+          </li>
+
+          <li class="flex items-center justify-between gap-6 py-6 sm:py-7">
+            <h3 class="font-jost text-sm uppercase tracking-[0.15em] text-akari-text/65">Terça a Quinta</h3>
+            <div class="text-right">
+              <p class="font-dm-sans text-sm tabular-nums text-akari-text sm:text-base">
+                <time datetime="11:30">11h30</time> – <time datetime="15:00">15h00</time>
+              </p>
+              <p class="mt-2 font-dm-sans text-sm tabular-nums text-akari-text sm:text-base">
+                <time datetime="18:00">18h00</time> – <time datetime="22:30">22h30</time>
+              </p>
+            </div>
+          </li>
+
+          <li class="flex items-center justify-between gap-6 py-6 sm:py-7">
+            <h3 class="font-jost text-sm uppercase tracking-[0.15em] text-akari-text/65">Sexta e Sábado</h3>
+            <p class="font-dm-sans text-sm tabular-nums text-akari-text sm:text-base">
+              <time datetime="11:30">11h30</time> – <time datetime="23:00">23h00</time>
+            </p>
+          </li>
+
+          <li class="flex items-center justify-between gap-6 py-6 sm:py-7">
+            <h3 class="font-jost text-sm uppercase tracking-[0.15em] text-akari-text/65">Domingo</h3>
+            <p class="font-dm-sans text-sm tabular-nums text-akari-text sm:text-base">
+              <time datetime="12:00">12h00</time> – <time datetime="21:00">21h00</time>
+            </p>
+          </li>
+        </ul>
+
+        <p class="mt-6 text-right font-jost text-[10px] uppercase tracking-[0.2em] text-akari-text/40">
+          AKARI · Tubarão, Santa Catarina
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
