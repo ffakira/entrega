@@ -14,9 +14,15 @@
       </p>
     </div>
 
-    <%= link_to "Novo produto",
-      new_product_path,
-      class: "rounded-lg bg-neutral-900 px-5 py-3 text-sm font-medium text-white hover:bg-neutral-700" %>
+    <div class="flex flex-wrap gap-3">
+      <%= link_to "Categorias",
+        product_categories_path,
+        class: "rounded-lg border border-neutral-300 px-5 py-3 text-sm font-medium hover:bg-neutral-50" %>
+
+      <%= link_to "Novo produto",
+        new_product_path,
+        class: "rounded-lg bg-neutral-900 px-5 py-3 text-sm font-medium text-white hover:bg-neutral-700" %>
+    </div>
   </header>
 
   <% if flash[:notice].present? %>

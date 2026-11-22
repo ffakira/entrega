@@ -8,6 +8,11 @@ Rails.application.routes.draw do
     patch :status, on: :member
     delete :remove_image, on: :member
   end
+  resources :product_categories, except: %i[show] do
+    member do
+      patch :status
+    end
+  end
 
   root "pages#home"
 

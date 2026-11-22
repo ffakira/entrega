@@ -1,0 +1,59 @@
+<%= form_with model: product_category, class: "space-y-6" do |form| %>
+  <% if product_category.errors.any? %>
+    <div class="rounded-lg border border-red-200 bg-red-50 p-4">
+      <p class="font-medium text-red-800">
+        Não foi possível salvar a categoria:
+      </p>
+
+      <ul class="mt-2 list-inside list-disc text-sm text-red-700">
+        <% product_category.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, "Nome", class: "mb-2 block text-sm font-medium" %>
+
+    <%= form.text_field :name,
+      required: true,
+      maxlength: 60,
+      autofocus: true,
+      class: "w-full rounded-lg border border-neutral-300 px-4 py-3" %>
+  </div>
+
+  <div>
+    <%= form.label :description, "Descrição", class: "mb-2 block text-sm font-medium" %>
+
+    <%= form.text_area :description,
+      rows: 4,
+      class: "w-full rounded-lg border border-neutral-300 px-4 py-3" %>
+  </div>
+
+  <div>
+    <%= form.label :sort_order, "Ordem de exibição", class: "mb-2 block text-sm font-medium" %>
+
+    <%= form.number_field :sort_order,
+      min: 0,
+      step: 1,
+      required: true,
+      class: "w-full rounded-lg border border-neutral-300 px-4 py-3" %>
+
+    <p class="mt-2 text-xs text-neutral-500">
+      Categorias com menor número aparecem primeiro no menu.
+    </p>
+  </div>
+
+  <div class="flex flex-wrap gap-3 pt-2">
+    <%= form.submit(
+      product_category.persisted? ? "Salvar alterações" : "Criar categoria",
+      class: "cursor-pointer rounded-lg bg-neutral-900 px-5 py-3 text-sm font-medium text-white hover:bg-neutral-700"
+    ) %>
+
+    <%= link_to "Cancelar",
+      product_categories_path,
+      class: "rounded-lg border border-neutral-300 px-5 py-3 text-sm font-medium hover:bg-neutral-50"
+    %>
+  </div>
+<% end %>

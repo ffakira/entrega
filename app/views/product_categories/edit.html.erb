@@ -1,0 +1,17 @@
+<main class="mx-auto max-w-2xl px-4 py-10">
+  <header class="mb-8">
+    <p class="text-sm font-medium uppercase tracking-widest text-neutral-500">
+      AKARI / ADMINISTRAÇÃO
+    </p>
+
+    <h1 class="mt-2 text-3xl font-bold tracking-tight">
+      Editar categoria
+    </h1>
+
+    <p class="mt-2 text-neutral-600">
+      <%= @product_category.name %>
+    </p>
+  </header>
+
+  <%= render "form", product_category: @product_category %>
+</main>
