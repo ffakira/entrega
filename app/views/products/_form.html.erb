@@ -1,0 +1,104 @@
+<%= form_with model: product, class: "space-y-6" do |form| %>
+  <% if product.errors.any? %>
+    <div class="rounded-lg border border-red-200 bg-red-50 p-4">
+      <p class="font-medium text-red-800">
+        Não foi possível salvar o produto:
+      </p>
+
+      <ul class="mt-2 list-inside list-disc text-sm text-red-700">
+        <% product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, "Nome", class: "mb-2 block text-sm font-medium" %>
+
+    <%= form.text_field :name,
+      required: true,
+      maxlength: 120,
+      class: "w-full rounded-lg border border-neutral-300 px-4 py-3" %>
+  </div>
+
+  <div>
+    <%= form.label :description, "Descrição", class: "mb-2 block text-sm font-medium" %>
+
+    <%= form.text_area :description,
+      rows: 3,
+      maxlength: 1000,
+      class: "w-full rounded-lg border border-neutral-300 px-4 py-3" %>
+  </div>
+
+  <div>
+    <%= form.label :category, "Categoria", class: "mb-2 block text-sm font-medium" %>
+
+    <%= form.text_field :category,
+      required: true,
+      maxlength: 60,
+      class: "w-full rounded-lg border border-neutral-300 px-4 py-3" %>
+  </div>
+
+  <div>
+    <%= form.label :image,
+      "Imagem do produto",
+      class: "mb-2 block text-sm font-medium" %>
+
+    <% if product.image.attached? && product.errors[:image].empty? %>
+      <div class="mb-4">
+        <%= image_tag product.image.variant(:thumbnail),
+          alt: product.name,
+          class: "h-40 w-40 rounded-lg border border-neutral-200 object-cover",
+          loading: "lazy" %>
+
+        <p class="mt-2 text-xs text-neutral-500">
+          Imagem atual. Envie outra para substituí-la.
+        </p>
+      </div>
+    <% end %>
+
+    <%= form.file_field :image,
+      accept: "image/jpeg,image/png,image/webp",
+      class: "block w-full rounded-lg border border-neutral-300 px-4 py-3 text-sm file:mr-4 file:rounded-md file:border-0 file:bg-neutral-100 file:px-4 file:py-2 file:font-medium" %>
+
+    <p class="mt-2 text-xs text-neutral-500">
+      JPEG, PNG ou WebP. Tamanho máximo: 5 MB.
+    </p>
+  </div>
+
+  <div class="grid gap-6 sm:grid-cols-2">
+    <div>
+      <%= label_tag "product_price", "Preço (R$)", class: "mb-2 block text-sm font-medium" %>
+
+      <%= text_field_tag "product[price]",
+        @price,
+        id: "product_price",
+        required: true,
+        inputmode: "decimal",
+        placeholder: "32,90",
+        class: "w-full rounded-lg border border-neutral-300 px-4 py-3" %>
+    </div>
+
+    <div>
+      <%= form.label :sort_order, "Ordem de exibição", class: "mb-2 block text-sm font-medium" %>
+
+      <%= form.number_field :sort_order,
+        min: 0,
+        step: 1,
+        required: true,
+        class: "w-full rounded-lg border border-neutral-300 px-4 py-3" %>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap gap-3 pt-2">
+    <%= form.submit(
+      product.persisted? ? "Salvar alterações" : "Criar produto",
+      class: "cursor-pointer rounded-lg bg-neutral-900 px-5 py-3 text-sm font-medium text-white hover:bg-neutral-700"
+    ) %>
+
+    <%= link_to "Cancelar",
+      products_path,
+      class: "rounded-lg border border-neutral-300 px-5 py-3 text-sm font-medium hover:bg-neutral-50" %>
+  </div>
+<% end %>

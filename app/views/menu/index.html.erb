@@ -27,25 +27,35 @@
 
           <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <% products.each do |product| %>
-              <article class="rounded-xl border border-neutral-200 p-5">
-                <h3 class="font-semibold text-neutral-900">
-                  <%= product.name %>
-                </h3>
-
-                <% if product.description.present? %>
-                  <p class="mt-2 text-sm text-neutral-600">
-                    <%= product.description %>
-                  </p>
+              <article class="overflow-hidden rounded-xl border border-neutral-200">
+                <% if product.image.attached? %>
+                  <%= image_tag product.image.variant(:menu),
+                    alt: product.name,
+                    class: "aspect-square w-full object-cover",
+                    loading: "lazy",
+                    decoding: "async" %>
                 <% end %>
 
-                <p class="mt-4 font-semibold text-neutral-900">
-                  <%= number_to_currency(
-                    product.price_cents / 100.0,
-                    unit: "R$ ",
-                    separator: ",",
-                    delimiter: "."
-                  ) %>
-                </p>
+                <div class="p-5">
+                  <h3 class="font-semibold text-neutral-900">
+                    <%= product.name %>
+                  </h3>
+
+                  <% if product.description.present? %>
+                    <p class="mt-2 text-sm text-neutral-600">
+                      <%= product.description %>
+                    </p>
+                  <% end %>
+
+                  <p class="mt-4 font-semibold text-neutral-900">
+                    <%= number_to_currency(
+                      product.price_cents / 100.0,
+                      unit: "R$ ",
+                      separator: ",",
+                      delimiter: "."
+                    ) %>
+                  </p>
+                </div>
               </article>
             <% end %>
           </div>

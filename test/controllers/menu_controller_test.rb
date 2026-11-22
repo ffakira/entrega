@@ -49,6 +49,41 @@ class MenuControllerTest < ActionDispatch::IntegrationTest
     assert_match "Nosso menu está sendo atualizado", response.body
   end
 
+  test "does not render an image element for products without an image" do
+    create_product(name: "Gyoza")
+
+    get menu_path
+
+    assert_response :success
+    assert_select "article img", count: 0
+  end
+
+  test "serves the optimized WebP image on the public menu" do
+    product = create_product(name: "Gyoza")
+
+    product.image.attach(
+      fixture_file_upload("product.png", "image/png")
+    )
+
+    get menu_path
+
+    assert_response :success
+
+    image = css_select("img[alt='Gyoza']").first
+    assert_not_nil image, "Expected the product image to appear in the menu"
+
+    image_url = URI.parse(image["src"])
+    get image_url.request_uri
+
+    assert_response :redirect
+
+    redirect_url = URI.parse(response.location)
+    get redirect_url.request_uri
+
+    assert_response :success
+    assert_equal "image/webp", response.media_type
+  end
+
   private
 
   def create_product(
