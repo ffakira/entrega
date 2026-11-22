@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :products, except: %i[show destroy] do
     patch :status, on: :member
+    delete :remove_image, on: :member
   end
 
   root "pages#home"

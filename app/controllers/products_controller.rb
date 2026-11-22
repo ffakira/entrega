@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[edit update status]
+  before_action :set_product, only: %i[edit update status remove_image]
 
   def index
     @products = Product.order(:category, :sort_order, :name)
@@ -47,6 +47,13 @@ class ProductsController < ApplicationController
       : "Produto desativado com sucesso."
 
     redirect_to products_path, notice: message
+  end
+
+  def remove_image
+    @product.image.purge if @product.image.attached?
+
+    redirect_to edit_product_path(@product),
+                notice: "Imagem removida com sucesso."
   end
 
   private

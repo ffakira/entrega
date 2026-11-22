@@ -233,3 +233,54 @@ class ProductsControllerImageTest < ActionDispatch::IntegrationTest
     assert_select "img[alt='Gyoza']"
   end
 end
+
+
+class ProductsControllerImageRemovalTest < ActionDispatch::IntegrationTest
+  setup do
+    @user = User.take
+    @product = Product.create!(
+      name: "Gyoza",
+      category: "Entradas",
+      price_cents: 2500
+    )
+    @product.image.attach(
+      fixture_file_upload("product.png", "image/png")
+    )
+  end
+
+  test "removes the image without deleting the product" do
+    sign_in_as(@user)
+
+    assert_difference("ActiveStorage::Attachment.count", -1) do
+      assert_difference("ActiveStorage::Blob.count", -1) do
+        assert_no_difference("Product.count") do
+          delete remove_image_product_path(@product)
+        end
+      end
+    end
+
+    assert_redirected_to edit_product_path(@product)
+    assert_equal "Imagem removida com sucesso.", flash[:notice]
+    assert_not @product.reload.image.attached?
+    assert_equal "Gyoza", @product.name
+  end
+
+  test "requires authentication to remove an image" do
+    delete remove_image_product_path(@product)
+
+    assert_redirected_to new_session_path
+    assert @product.reload.image.attached?
+  end
+
+  test "handles removal when the product has no image" do
+    sign_in_as(@user)
+    @product.image.purge
+
+    assert_no_difference("Product.count") do
+      delete remove_image_product_path(@product)
+    end
+
+    assert_redirected_to edit_product_path(@product)
+    assert_not @product.reload.image.attached?
+  end
+end
