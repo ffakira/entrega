@@ -11,6 +11,8 @@ module ActiveSupport
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
     fixtures :all
 
-    # Add more helper methods to be used by all tests here...
+    def product_category(name = "Entradas")
+      ProductCategory.find_or_create_by!(name: name)
+    end
   end
 end

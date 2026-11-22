@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
-  before_validation :normalize_category
+  belongs_to :product_category
+
   has_many :order_items,
            dependent: :restrict_with_exception
 
@@ -22,10 +23,6 @@ class Product < ApplicationRecord
   validates :description,
             length: { maximum: 1000 }
 
-  validates :category,
-            presence: true,
-            length: { maximum: 60 }
-
   validates :price_cents,
             numericality: {
               only_integer: true,
@@ -44,10 +41,6 @@ class Product < ApplicationRecord
   scope :ordered, -> { order(:sort_order, :name) }
 
   private
-
-  def normalize_category
-    self.category = category.to_s.squish.capitalize.presence
-  end
 
   def image_is_valid
     return unless image.attached?

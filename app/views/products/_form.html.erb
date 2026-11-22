@@ -32,12 +32,17 @@
   </div>
 
   <div>
-    <%= form.label :category, "Categoria", class: "mb-2 block text-sm font-medium" %>
+    <%= form.label :product_category_id, "Categoria", class: "mb-2 block text-sm font-medium" %>
 
-    <%= form.text_field :category,
-      required: true,
-      maxlength: 60,
-      class: "w-full rounded-lg border border-neutral-300 px-4 py-3" %>
+    <%= form.collection_select :product_category_id,
+      @product_categories,
+      :id,
+      :name,
+      { prompt: "Selecione uma categoria" },
+      {
+        required: true,
+        class: "w-full rounded-lg border border-neutral-300 px-4 py-3"
+      } %>
   </div>
 
   <div>

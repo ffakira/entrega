@@ -8,7 +8,7 @@ class PosDomainTest < ActiveSupport::TestCase
   def create_product
     Product.create!(
       name: "Gyoza",
-      category: "appetizer",
+      product_category_id: product_category("Appetizer").id,
       price_cents: 2500
     )
   end
@@ -53,7 +53,7 @@ class PosDomainTest < ActiveSupport::TestCase
   test "product price cannot be negative" do
     product = Product.new(
       name: "Gyoza",
-      category: "appetizer",
+      product_category_id: product_category("Appetizer").id,
       price_cents: -100
     )
 
@@ -65,7 +65,7 @@ class PosDomainTest < ActiveSupport::TestCase
     active = create_product
     inactive = Product.create!(
       name: "Unavailable",
-      category: "other",
+      product_category_id: product_category("Other").id,
       price_cents: 1000,
       active: false
     )

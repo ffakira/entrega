@@ -42,6 +42,25 @@ class MenuControllerTest < ActionDispatch::IntegrationTest
     assert_no_match "Hidden product", response.body
   end
 
+  test "does not show products belonging to inactive categories" do
+    category = ProductCategory.create!(
+      name: "Categoria desativada",
+      active: false
+    )
+
+    Product.create!(
+      name: "Hidden category product",
+      product_category: category,
+      price_cents: 2500
+    )
+
+    get menu_path
+
+    assert_response :success
+    assert_no_match "Hidden category product", response.body
+    assert_no_match "Categoria desativada", response.body
+  end
+
   test "shows an empty state when no active products exist" do
     get menu_path
 
@@ -95,7 +114,7 @@ class MenuControllerTest < ActionDispatch::IntegrationTest
   )
     Product.create!(
       name: name,
-      category: category,
+      product_category: product_category(category),
       price_cents: price_cents,
       active: active,
       sort_order: sort_order

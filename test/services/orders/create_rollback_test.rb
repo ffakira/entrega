@@ -5,7 +5,7 @@ module Orders
     test "rolls back the entire order when event creation fails" do
       product = Product.create!(
         name: "Gyoza",
-        category: "appetizer",
+        product_category_id: product_category("Appetizer").id,
         price_cents: 2500,
         active: true
       )

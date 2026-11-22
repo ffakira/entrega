@@ -16,7 +16,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
     Product.create!(
       name: "Gyoza",
-      category: "Entradas",
+      product_category_id: product_category("Entradas").id,
       price_cents: 2500
     )
 
@@ -36,7 +36,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
         product: {
           name: "Gyoza",
           description: "Porção de seis unidades",
-          category: "Entradas",
+          product_category_id: product_category("Entradas").id,
           price: "32,90",
           sort_order: "1"
         }
@@ -58,7 +58,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
       post products_path, params: {
         product: {
           name: "Gyoza",
-          category: "Entradas",
+          product_category_id: product_category("Entradas").id,
           price: "invalid",
           sort_order: "0"
         }
@@ -68,19 +68,59 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
   end
 
+  test "does not create a product with a nonexistent category" do
+    sign_in_as(@user)
+
+    assert_no_difference("Product.count") do
+      post products_path, params: {
+        product: {
+          name: "Gyoza",
+          product_category_id: 999_999,
+          price: "32,90",
+          sort_order: "0"
+        }
+      }
+    end
+
+    assert_response :unprocessable_entity
+  end
+
+  test "keeps an inactive category selected when editing its product" do
+    sign_in_as(@user)
+
+    category = ProductCategory.create!(
+      name: "Categoria antiga",
+      active: false
+    )
+
+    product = Product.create!(
+      name: "Gyoza",
+      product_category: category,
+      price_cents: 2500
+    )
+
+    get edit_product_path(product)
+
+    assert_response :success
+    assert_select(
+      "select[name='product[product_category_id]'] option[selected][value='#{category.id}']",
+      text: "Categoria antiga"
+    )
+  end
+
   test "updates an existing product" do
     sign_in_as(@user)
 
     product = Product.create!(
       name: "Gyoza",
-      category: "Entradas",
+      product_category_id: product_category("Entradas").id,
       price_cents: 2500
     )
 
     patch product_path(product), params: {
       product: {
         name: "Gyoza especial",
-        category: "Entradas",
+        product_category_id: product_category("Entradas").id,
         price: "35,90",
         sort_order: "2"
       }
@@ -100,7 +140,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
     product = Product.create!(
       name: "Gyoza",
-      category: "Entradas",
+      product_category_id: product_category("Entradas").id,
       price_cents: 2500,
       active: true
     )
@@ -118,7 +158,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   test "does not expose product administration to unauthenticated users" do
     product = Product.create!(
       name: "Gyoza",
-      category: "Entradas",
+      product_category_id: product_category("Entradas").id,
       price_cents: 2500
     )
 
@@ -144,7 +184,7 @@ class ProductsControllerImageTest < ActionDispatch::IntegrationTest
       post products_path, params: {
         product: {
           name: "Gyoza",
-          category: "Entradas",
+          product_category_id: product_category("Entradas").id,
           price: "32,90",
           sort_order: "0",
           image: fixture_file_upload(
@@ -167,7 +207,7 @@ class ProductsControllerImageTest < ActionDispatch::IntegrationTest
       post products_path, params: {
         product: {
           name: "Gyoza",
-          category: "Entradas",
+          product_category_id: product_category("Entradas").id,
           price: "32,90",
           sort_order: "0",
           image: fixture_file_upload(
@@ -185,7 +225,7 @@ class ProductsControllerImageTest < ActionDispatch::IntegrationTest
   test "preserves the existing image when replacement is invalid" do
     product = Product.create!(
       name: "Gyoza",
-      category: "Entradas",
+      product_category_id: product_category("Entradas").id,
       price_cents: 2500
     )
 
@@ -198,7 +238,7 @@ class ProductsControllerImageTest < ActionDispatch::IntegrationTest
     patch product_path(product), params: {
       product: {
         name: "Gyoza atualizado",
-        category: "Entradas",
+        product_category_id: product_category("Entradas").id,
         price: "35,90",
         sort_order: "0",
         image: fixture_file_upload(
@@ -219,7 +259,7 @@ class ProductsControllerImageTest < ActionDispatch::IntegrationTest
   test "renders the product image in the administration list" do
     product = Product.create!(
       name: "Gyoza",
-      category: "Entradas",
+      product_category_id: product_category("Entradas").id,
       price_cents: 2500
     )
 
@@ -240,7 +280,7 @@ class ProductsControllerImageRemovalTest < ActionDispatch::IntegrationTest
     @user = User.take
     @product = Product.create!(
       name: "Gyoza",
-      category: "Entradas",
+      product_category_id: product_category("Entradas").id,
       price_cents: 2500
     )
     @product.image.attach(

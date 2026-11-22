@@ -5,7 +5,7 @@ module Orders
     def create_product(name: "Gyoza", price_cents: 2500, active: true)
       Product.create!(
         name: name,
-        category: "appetizer",
+        product_category_id: product_category("Appetizer").id,
         price_cents: price_cents,
         active: active
       )

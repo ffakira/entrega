@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_22_183322) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_22_190000) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -132,10 +132,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_22_183322) do
     t.check_constraint "status IN ('pending', 'paid', 'refunded')", name: "payments_valid_status"
   end
 
+  create_table "product_categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.integer "sort_order", default: 0, null: false
+    t.boolean "active", default: true, null: false
+    t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["name"], name: "index_product_categories_on_name", unique: true
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name", null: false
     t.text "description", default: "", null: false
-    t.string "category", null: false
     t.integer "price_cents", null: false
     t.boolean "active", default: true, null: false
     t.integer "sort_order", default: 0, null: false
@@ -144,7 +153,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_22_183322) do
     t.string "color", default: "#E7E5E4", null: false
     t.string "glyph", default: "•", null: false
     t.boolean "is_popular", default: false, null: false
-    t.index ["active", "category"], name: "index_products_on_active_and_category"
+    t.integer "product_category_id", null: false
+    t.index ["active", "product_category_id"], name: "index_products_on_active_and_product_category"
+    t.index ["product_category_id"], name: "index_products_on_product_category_id"
     t.check_constraint "active IN (0, 1)", name: "products_active_boolean"
     t.check_constraint "price_cents >= 0", name: "products_price_nonnegative"
   end
@@ -174,5 +185,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_22_183322) do
   add_foreign_key "order_items", "products", on_delete: :restrict
   add_foreign_key "orders", "customers", on_delete: :restrict
   add_foreign_key "payments", "orders", on_delete: :restrict
+  add_foreign_key "products", "product_categories", on_delete: :restrict
   add_foreign_key "sessions", "users"
 end
