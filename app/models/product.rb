@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  before_validation :normalize_category
   has_many :order_items,
            dependent: :restrict_with_exception
 
@@ -43,6 +44,10 @@ class Product < ApplicationRecord
   scope :ordered, -> { order(:sort_order, :name) }
 
   private
+
+  def normalize_category
+    self.category = category.to_s.squish.capitalize.presence
+  end
 
   def image_is_valid
     return unless image.attached?

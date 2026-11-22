@@ -19,4 +19,52 @@ class ProductTest < ActiveSupport::TestCase
     assert_not product.valid?
     assert_includes product.errors[:image], "deve ter no máximo 5 MB"
   end
+
+  test "normalizes category whitespace and capitalization" do
+    product = Product.new(
+      name: "Gyoza",
+      category: "  pratos   principais ",
+      price_cents: 2500
+    )
+
+    assert product.valid?
+    assert_equal "Pratos principais", product.category
+  end
+
+  test "normalizes a single-word category" do
+    product = Product.new(
+      name: "Gyoza",
+      category: "  gyoza  ",
+      price_cents: 2500
+    )
+
+    assert product.valid?
+    assert_equal "Gyoza", product.category
+  end
+
+  test "rejects a blank category" do
+    product = Product.new(
+      name: "Gyoza",
+      category: "   ",
+      price_cents: 2500
+    )
+
+    assert_not product.valid?
+    category_errors = product.errors.details[:category].map do |error|
+      error[:error]
+    end
+
+    assert_includes category_errors, :blank
+  end
+
+  test "preserves Portuguese accents when normalizing category" do
+    product = Product.new(
+      name: "Gyoza",
+      category: "  porções especiais ",
+      price_cents: 2500
+    )
+
+    assert product.valid?
+    assert_equal "Porções especiais", product.category
+  end
 end
